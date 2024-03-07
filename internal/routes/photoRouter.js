@@ -27,8 +27,9 @@ function validatePhotoRequest(req, res, next) {
 router.post(
     "/create",
     authenticate,
-    validatePhotoRequest,
+
     upload.single("image"),
+    validatePhotoRequest,
     async (req, res) => {
         try {
             const post_id = req.body.post_id;
