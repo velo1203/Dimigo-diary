@@ -8,8 +8,14 @@ db.serialize(() => {
         "CREATE TABLE IF NOT EXISTS users (id INTEGER PRIMARY KEY AUTOINCREMENT, email TEXT UNIQUE,username TEXT, password TEXT)"
     );
 
+    // photos 테이블에 post_id 필드 추가
     db.run(
-        "CREATE TABLE IF NOT EXISTS photos (id INTEGER PRIMARY KEY AUTOINCREMENT,  path TEXT, upload_date DATETIME, FOREIGN KEY(user_id) REFERENCES users(id))"
+        "CREATE TABLE IF NOT EXISTS photos (id INTEGER PRIMARY KEY AUTOINCREMENT, post_id INTEGER, path TEXT, upload_date DATETIME, FOREIGN KEY(post_id) REFERENCES posts(id))"
+    );
+
+    // posts 테이블 생성
+    db.run(
+        "CREATE TABLE IF NOT EXISTS posts (id INTEGER PRIMARY KEY AUTOINCREMENT, user_id INTEGER, title TEXT, description TEXT, FOREIGN KEY(user_id) REFERENCES users(id))"
     );
 });
 
