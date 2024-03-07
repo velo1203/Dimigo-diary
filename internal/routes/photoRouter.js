@@ -14,9 +14,20 @@ const upload = multer({
         },
     }),
 });
+
+function validatePhotoRequest(req, res, next) {
+    if (!req.body.post_id || !req.file) {
+        return res
+            .status(400)
+            .json({ error: "Request must include post_id and image file" });
+    }
+    next();
+}
+
 router.post(
     "/create",
     authenticate,
+    validatePhotoRequest,
     upload.single("image"),
     async (req, res) => {
         try {
