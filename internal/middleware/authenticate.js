@@ -13,7 +13,6 @@ const authenticate = (req, res, next) => {
     if (!token) {
         return res.sendStatus(401);
     }
-    console.log(token);
     // 토큰 검증
     jwt.verify(token, secretKey, (err, decoded) => {
         // 토큰이 유효하지 않거나 만료된 경우, 403 Forbidden 응답
