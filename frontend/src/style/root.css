@@ -9,5 +9,7 @@
 :root {
     --Pink: #e83c77;
     --White: white;
-    --Font: #32343d;
+    --Font: #3e3e3e;
+    --Input: #f4f7fa;
+    --BoxShadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
 }

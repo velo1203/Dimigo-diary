@@ -14,12 +14,12 @@ const upload = multer({
         },
     }),
 });
-
 function validatePhotoRequest(req, res, next) {
-    if (!req.body.post_id || !req.file) {
+    if (!req.body.title || !req.body.description || !req.file) {
+        // '!' 연산자를 추가하여 필드가 없는 경우를 검사
         return res
             .status(400)
-            .json({ error: "Request must include post_id and image file" });
+            .json({ error: "Title, description, and image are required." });
     }
     next();
 }
@@ -27,16 +27,17 @@ function validatePhotoRequest(req, res, next) {
 router.post(
     "/create",
     authenticate,
-
     upload.single("image"),
     validatePhotoRequest,
     async (req, res) => {
         try {
-            const post_id = req.body.post_id;
             const photo_name = req.file.filename;
+            const title = req.body.title;
+            const description = req.body.description;
             const photo_id = await photoController.createPhoto(
-                post_id,
-                photo_name
+                photo_name,
+                title,
+                description
             );
             res.json({ message: "Photo created successfully", photo_id });
         } catch (err) {
@@ -45,4 +46,28 @@ router.post(
     }
 );
 
+router.delete("/:photoId", authenticate, async (req, res) => {
+    try {
+        const photoId = req.params.photoId;
+        const changes = await photoController.deletePhoto(photoId);
+        res.json({ message: "Photo deleted successfully", changes });
+    } catch (err) {
+        return res.status(400).json({ error: err.message });
+    }
+});
+
+router.get("/", async (req, res) => {
+    try {
+        const month = req.query.month;
+        let photos;
+        if (month) {
+            photos = await photoController.getPhotosByMonth(month);
+        } else {
+            photos = await photoController.getAllPhotos();
+        }
+        res.json(photos);
+    } catch (err) {
+        return res.status(400).json({ error: err.message });
+    }
+});
 module.exports = router;

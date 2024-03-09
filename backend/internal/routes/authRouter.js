@@ -8,21 +8,21 @@ const {
 } = require("../requestmodel/authModel");
 
 // 회원가입을 위한 POST 엔드포인트
-router.post("/register", async (req, res) => {
-    try {
-        const request = new registerRequestModel(req.body);
-        request.validate();
+// router.post("/register", async (req, res) => {
+//     try {
+//         const request = new registerRequestModel(req.body);
+//         request.validate();
 
-        const userId = await authService.register(
-            req.body.email,
-            req.body.username,
-            req.body.password
-        );
-        res.json({ message: "User registered successfully", userId });
-    } catch (err) {
-        return res.status(400).json({ error: err.message });
-    }
-});
+//         const userId = await authService.register(
+//             req.body.email,
+//             req.body.username,
+//             req.body.password
+//         );
+//         res.json({ message: "User registered successfully", userId });
+//     } catch (err) {
+//         return res.status(400).json({ error: err.message });
+//     }
+// });
 
 // 로그인을 위한 POST 엔드포인트
 router.post("/login", async (req, res) => {

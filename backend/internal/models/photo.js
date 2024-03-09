@@ -3,12 +3,16 @@ class Photo {
         this.db = db;
     }
 
-    //사진 추가
-    createPhoto(post_id, path) {
+    // 사진 추가
+    createPhoto(filename, title, description) {
+        const date = new Date();
+        const month = date.getMonth() + 1; // getMonth는 0부터 시작하므로 1을 더해줍니다.
+        const day = date.getDate();
+
         return new Promise((resolve, reject) => {
             this.db.run(
-                "INSERT INTO photos (post_id, path, upload_date) VALUES (?, ?, ?)",
-                [post_id, path, new Date()],
+                "INSERT INTO photos (filename, title, description, month, day) VALUES (?, ?,?, ?, ?)",
+                [filename, title, description, month, day],
                 function (err) {
                     if (err) reject(err);
                     else resolve(this.lastID);
@@ -17,15 +21,39 @@ class Photo {
         });
     }
 
-    //post id에 해당하는 사진 전부 가져오기
-    getPhotosByPostId(post_id) {
+    getPhotosByMonth(month) {
         return new Promise((resolve, reject) => {
             this.db.all(
-                "SELECT * FROM photos WHERE post_id = ?",
-                [post_id],
+                "SELECT * FROM photos WHERE month = ? ORDER BY day DESC",
+                [month],
                 function (err, rows) {
                     if (err) reject(err);
                     else resolve(rows);
+                }
+            );
+        });
+    }
+
+    // 모든 사진 가져오기
+    getAllPhotos() {
+        return new Promise((resolve, reject) => {
+            this.db.all(
+                "SELECT * FROM photos ORDER BY month DESC, day DESC",
+                function (err, rows) {
+                    if (err) reject(err);
+                    else resolve(rows);
+                }
+            );
+        });
+    }
+    deletePhoto(photoId) {
+        return new Promise((resolve, reject) => {
+            this.db.run(
+                "DELETE FROM photos WHERE id = ?",
+                [photoId],
+                function (err) {
+                    if (err) reject(err);
+                    else resolve(this.changes); // 삭제된 행의 수를 반환
                 }
             );
         });

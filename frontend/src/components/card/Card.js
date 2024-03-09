@@ -4,49 +4,69 @@ export const StyledCardContainer = styled.div`
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    justify-content: flex-start;
+    justify-content: flex-start; /* 왼쪽 정렬을 위해 수정 */
     margin-top: 35px;
+    padding: 0 1rem; /* 컨테이너의 좌우 패딩 */
 `;
-
 export const StyledCard = styled.div`
     display: flex;
     flex-direction: column;
-    gap: 1rem;
     margin: 0.5rem;
     background-color: var(--White);
-    flex-basis: calc(100% - 1rem); // 모바일 뷰를 위해 기본적으로 100%
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* 카드에 그림자 추가 */
+    overflow: hidden; /* 이미지가 카드의 모서리 반경을 따르도록 */
+    transition: transform 0.2s ease-in-out; /* 호버 효과를 위한 트랜지션 */
 
-    @media (min-width: 768px) {
+    &:hover {
+        transform: translateY(-5px); /* 호버 시 카드가 약간 위로 이동 */
+        box-shadow: 0 10px 10px rgba(0, 0, 0, 0.15); /* 카드에 그림자 추가 */
+    }
+    @media (min-width: 720px) {
         flex-basis: calc(
             50% - 1rem
-        ); // 태블릿 뷰에서는 2개의 카드를 한 줄에 배치
+        ); /* 중간 크기의 화면에서 2개의 카드를 한 줄에 배치 */
     }
 
-    @media (min-width: 1024px) {
+    @media (min-width: 1200px) {
         flex-basis: calc(
             33.3333% - 1rem
-        ); // 데스크톱 뷰에서는 3개의 카드를 한 줄에 배치
+        ); /* 더 넓은 화면에서 3개의 카드를 한 줄에 배치 */
     }
 
     img {
         width: 100%;
-        height: 300px; // 이미지의 높이를 자동으로 설정하여 비율을 유지
-        object-fit: cover;
+        height: 250px;
+        object-fit: contain; /* 이미지가 카드 영역을 꽉 채움 */
     }
 `;
 
-export const StlyedCardInfo = styled.div`
+export const StyledCardInfo = styled.div`
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
     padding: 1rem;
 
     h1 {
-        font-size: 1.5rem;
+        font-size: 1.3rem; /* 제목의 글꼴 크기 조정 */
         font-weight: bold;
+        margin: 0; /* 기본 마진 제거 */
+        color: var(--Pink);
     }
+
     p {
         font-size: 1rem;
         color: var(--Font);
+        margin: 0; /* 기본 마진 제거 */
     }
+`;
+
+export const StyledCardDate = styled.div`
+    text-align: right;
+    padding: 0 15px 15px 0;
+    color: var(--Font);
+`;
+
+export const StyledCardDelete = styled.div`
+    text-align: right;
+    padding: 0 15px 15px 0;
 `;
