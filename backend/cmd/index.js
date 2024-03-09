@@ -25,13 +25,13 @@ app.get("/api/protected", authenticate, (req, res) => {
 });
 
 app.use("/static/photos", express.static(path.join(__dirname, "..", "photos")));
-//react app build folder path is: ../../frontend/build
-// app.use(express.static(path.join(__dirname, "..", "..", "frontend", "build")));
-// app.get("*", (req, res) => {
-//     res.sendFile(
-//         path.join(__dirname, "..", "..", "frontend", "build", "index.html")
-//     );
-// });
+// react app build folder path is: ../../frontend/build
+app.use(express.static(path.join(__dirname, "..", "..", "frontend", "build")));
+app.get("*", (req, res) => {
+    res.sendFile(
+        path.join(__dirname, "..", "..", "frontend", "build", "index.html")
+    );
+});
 
 app.listen(port, () => {
     console.log(`Server running at http://localhost:${port}`);
