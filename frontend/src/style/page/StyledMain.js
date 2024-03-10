@@ -44,6 +44,17 @@ export const StyledTitleSection = styled.div`
         align-items: baseline;
         gap: 10px;
     }
+    @media (max-width: 720px) {
+        h1 {
+            font-size: 2rem;
+        }
+        h2 {
+            font-size: 1.8rem;
+        }
+        h3 {
+            font-size: 1.6rem;
+        }
+    }
 `;
 
 export const StyledMonth = styled.h1`
