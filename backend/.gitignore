@@ -14,8 +14,6 @@ yarn-error.log*
 # 데이터베이스
 *.db
 
-AdminList.json
-
 # OS 생성 파일
 .DS_Store
 .DS_Store?
