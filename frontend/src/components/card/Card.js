@@ -36,7 +36,8 @@ export const StyledCard = styled.div`
     img {
         width: 100%;
         height: 250px;
-        object-fit: contain; /* 이미지가 카드 영역을 꽉 채움 */
+        //이미지가 형태 유지
+        background-size: cover;
     }
 `;
 
