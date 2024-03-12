@@ -39,6 +39,7 @@ function Upload() {
             })
             .catch((error) => {
                 console.error("Upload Error:", error);
+                alert("Upload failed", error.message);
             });
     };
 
