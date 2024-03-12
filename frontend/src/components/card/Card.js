@@ -35,9 +35,7 @@ export const StyledCard = styled.div`
 
     img {
         width: 100%;
-        height: 250px;
-        //이미지가 형태 유지
-        background-size: cover;
+        max-height: 250px;
     }
 `;
 
