@@ -34,8 +34,7 @@ export const StyledCard = styled.div`
     }
 
     img {
-        width: 100%;
-        height: 200px; /* 이미지의 높이를 고정 */
+        height: 300px; /* 이미지의 높이를 고정 */
         object-fit: cover; /* 이미지가 카드에 맞게 잘리지 않도록 */
     }
 `;
