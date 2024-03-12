@@ -24,7 +24,7 @@ class Photo {
     getPhotosByMonth(month) {
         return new Promise((resolve, reject) => {
             this.db.all(
-                "SELECT * FROM photos WHERE month = ? ORDER BY day DESC",
+                "SELECT * FROM photos WHERE month = ? ORDER BY createdAt DESC",
                 [month],
                 function (err, rows) {
                     if (err) reject(err);
@@ -36,9 +36,10 @@ class Photo {
 
     // 모든 사진 가져오기
     getAllPhotos() {
+        //모든사진
         return new Promise((resolve, reject) => {
             this.db.all(
-                "SELECT * FROM photos ORDER BY month DESC, day DESC",
+                "SELECT * FROM photos ORDER BY createdAt DESC",
                 function (err, rows) {
                     if (err) reject(err);
                     else resolve(rows);
