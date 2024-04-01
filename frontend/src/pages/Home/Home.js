@@ -61,7 +61,7 @@ function Home() {
                         Beginning in <span>2024</span>
                     </h3>
                     <h1>
-                        <span>디</span>지털 <span>미</span>디어 <span>고</span>
+                        <span>선</span>린 <span>인</span>터넷 <span>고</span>
                         등학교
                     </h1>
                     <div>
