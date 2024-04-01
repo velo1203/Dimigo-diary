@@ -100,39 +100,43 @@ function Home() {
                     </StyledCardContainer>
                 </StyledCardlistContainer>
             ) : (
-                Object.keys(photosByMonth).map((month) => (
-                    <StyledCardlistContainer key={month}>
-                        <StyledMonth>{month}월</StyledMonth>
-                        <StyledCardContainer>
-                            {photosByMonth[month].map((photo) => (
-                                <StyledCard key={photo.id}>
-                                    <img
-                                        src={`/static/photos/${photo.filename}`}
-                                        alt={photo.title}
-                                    />
-                                    <StyledCardInfo>
-                                        <h1>{photo.title}</h1>
-                                        <p>{photo.description}</p>
-                                    </StyledCardInfo>
-                                    <StyledCardDate>
-                                        {photo.createdAt}
-                                    </StyledCardDate>
-                                    {token && (
-                                        <StyledCardDelete>
-                                            <Button
-                                                onClick={() =>
-                                                    handleDeletePhoto(photo.id)
-                                                }
-                                            >
-                                                삭제
-                                            </Button>
-                                        </StyledCardDelete>
-                                    )}
-                                </StyledCard>
-                            ))}
-                        </StyledCardContainer>
-                    </StyledCardlistContainer>
-                ))
+                Object.keys(photosByMonth)
+                    .sort((a, b) => b - a)
+                    .map((month) => (
+                        <StyledCardlistContainer key={month}>
+                            <StyledMonth>{month}월</StyledMonth>
+                            <StyledCardContainer>
+                                {photosByMonth[month].map((photo) => (
+                                    <StyledCard key={photo.id}>
+                                        <img
+                                            src={`/static/photos/${photo.filename}`}
+                                            alt={photo.title}
+                                        />
+                                        <StyledCardInfo>
+                                            <h1>{photo.title}</h1>
+                                            <p>{photo.description}</p>
+                                        </StyledCardInfo>
+                                        <StyledCardDate>
+                                            {photo.createdAt}
+                                        </StyledCardDate>
+                                        {token && (
+                                            <StyledCardDelete>
+                                                <Button
+                                                    onClick={() =>
+                                                        handleDeletePhoto(
+                                                            photo.id
+                                                        )
+                                                    }
+                                                >
+                                                    삭제
+                                                </Button>
+                                            </StyledCardDelete>
+                                        )}
+                                    </StyledCard>
+                                ))}
+                            </StyledCardContainer>
+                        </StyledCardlistContainer>
+                    ))
             )}
         </StyledDefaultPage>
     );
