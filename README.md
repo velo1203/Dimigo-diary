@@ -6,3 +6,7 @@ https://diarydimi.site/
 사이트 링크입니다.
 
 <img src="https://github.com/velo1203/Dimigo-diary/raw/main/1.png" width="450px">
+
+
+
+asdfasf
