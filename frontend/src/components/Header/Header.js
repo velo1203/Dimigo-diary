@@ -17,7 +17,7 @@ function Header() {
                         navigate("/");
                     }}
                 >
-                    <span>선린</span> diary
+                    <span>Dimi</span> diary
                 </h1>
                 {token !== null && (
                     <div>
