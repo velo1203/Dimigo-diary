@@ -24,6 +24,7 @@ import useAuthStore from "../../store/userStore";
 function Home() {
     const [photosByMonth, setPhotosByMonth] = useState({});
     const [selectedMonth, setSelectedMonth] = useState("");
+    const [changeColor, setChangeColor] = useState(false); // [1
     const [changevent, setChangevent] = useState(true);
     const token = useAuthStore((state) => state.token);
     useEffect(() => {
@@ -49,9 +50,37 @@ function Home() {
             });
         }
     };
+
     const handleMonthChange = (event) => {
         setSelectedMonth(event.target.value);
     };
+
+    useEffect(() => {
+        const colors = [
+            "rgb(255, 0, 0)", // 빨강
+            "rgb(255, 165, 0)", // 주황
+            "rgb(255, 255, 0)", // 노랑
+            "rgb(0, 128, 0)", // 초록
+            "rgb(0, 0, 255)", // 파랑
+            "rgb(0, 0, 128)", // 남색
+            "rgb(128, 0, 128)", // 보라
+        ];
+        let colorIndex = 0;
+
+        function changeBackground() {
+            if (!changeColor) return;
+            const color = colors[colorIndex];
+            document.documentElement.style.setProperty("--Pink", color);
+            document.body.style.backgroundColor = color;
+            colorIndex = (colorIndex + 1) % colors.length;
+        }
+
+        // 주기적으로 색상 변경
+        const intervalId = setInterval(changeBackground, 1); // 1000ms = 1초
+
+        // 컴포넌트가 unmount될 때 interval clear
+        return () => clearInterval(intervalId);
+    }, [changeColor]);
 
     return (
         <StyledDefaultPage>
@@ -67,6 +96,14 @@ function Home() {
                     <div>
                         <h1>1학년 4반의</h1>
                         <h2>순간들</h2>
+                        <h2
+                            style={{ color: "var(--Pink)" }}
+                            onClick={() => {
+                                setChangeColor(true);
+                            }}
+                        >
+                            여기를 누르세요!
+                        </h2>
                     </div>
                 </StyledTitleSection>
                 <StyledSelectSection>
